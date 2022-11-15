@@ -1,0 +1,29 @@
+body {
+    /* background-color: black; */
+}
+
+video, canvas {
+    object-fit: cover;   
+    display: block;
+    margin: auto;
+}
+
+.btn {
+    display: block;
+    margin: auto;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 30px;
+}
+
+.canvas-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas-btn button {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 30px;
+}

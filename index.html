@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title></title>
+</head>
+<body id="app">
+    <div>
+
+        <div v-show="isLoading">
+            <span>Loading ...</span>
+        </div>
+
+        <div v-show="!isLoading && !isPhotoTaken">
+            <video ref="camera" :width="width" :height="height" with autoplay></video>
+            <button class="btn" @click="takePhoto">Take Photo</button>
+        </div>
+
+        <div v-show="isPhotoTaken">
+            <canvas ref="canvas" :width="width" :height="height" id="photoTaken"></canvas>
+            <div class="canvas-btn">
+                <button  @click="reDoPhoto">Try Again</button>
+                <a id="downloadPhoto" download="my-photo.png">
+                    <button  @click="downloadImg">Download </button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- <button @click="toggleCamera">
+
+        <span v-if="!isCameraOpen">Open Camera</span>
+        <span v-else>Close Camera</span>
+        
+    </button> -->
+</body>
+<script src="./main.js"></script>
+</html>
+
+  
