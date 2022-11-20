@@ -10,15 +10,14 @@
 </head>
 <body id="app">
     <div>
-
         <div v-show="isLoading">
             <span>Loading ...</span>
         </div>
 
         <div v-show="!isLoading && !isPhotoTaken">
-            <select ref="videoSource">
+            <!-- <select ref="videoSource">
                 <option v-for="videoDevice in VideoDevices" :value="videoDevice.label"></option>
-            </select>
+            </select> -->
             <video ref="camera"  with autoplay></video>
             <button class="btn" @click="takePhoto">Take Photo</button>
         </div>
@@ -34,13 +33,6 @@
         </div>
 
     </div>
-
-    <!-- <button @click="toggleCamera">
-
-        <span v-if="!isCameraOpen">Open Camera</span>
-        <span v-else>Close Camera</span>
-        
-    </button> -->
 </body>
 <script src="./main.js"></script>
 </html>

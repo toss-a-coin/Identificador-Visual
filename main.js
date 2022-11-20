@@ -1,12 +1,10 @@
-'use strict'
-
 const app = Vue.createApp({
     name: 'App',
 
     data() {
         return {
             isCameraOpen: false,
-            isLoading: false,
+            isLoading: true,
             isPhotoTaken: false,
             stream: null,
             videoDevices: {},
@@ -31,12 +29,13 @@ const app = Vue.createApp({
         },
 
         getDevices(devicesInfo) {
-            for(let i in devicesInfo){
-                if(devicesInfo[i].kind === 'videoinput'){
-                    console.log(devicesInfo[i]);
-                    // this.videoDevices = {...this.videoDevices, devicesInfo[i]};
-                }
-            }   
+            console.log(devicesInfo);
+            // for(let i in devicesInfo){
+            //     if(devicesInfo[i].kind === 'videoinput'){
+            //         console.log(devicesInfo[i]);
+            //         // this.videoDevices = {...this.videoDevices, devicesInfo[i]};
+            //     }
+            // }   
         },
 
         createCameraElement() {
@@ -52,11 +51,9 @@ const app = Vue.createApp({
                     }
                   }
 			};
-            // Camara Steres id: '549e50b014e309539477605d9a314b11e8e76f832e927aff791f66b053cf3df1'
             navigator.mediaDevices
             .getUserMedia(constraints)
             .then(stream => {
-                console.log(stream);
                 this.isLoading = false;
                 this.$refs.camera.srcObject = stream;
                 this.stream = stream;
@@ -106,7 +103,7 @@ const app = Vue.createApp({
     mounted() {
         // this.$refs.canvas.clientWidth = this.$refs.camera.clientWidth;
         // this.$refs.canvas.clientHeight = this.$refs.camera.clientHeight;
-        navigator.mediaDevices.enumerateDevices().then(this.getDevices());
+        navigator.mediaDevices.enumerateDevices().then(devices => console.log(devices));
         this.createCameraElement();
     }
 });
