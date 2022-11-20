@@ -16,7 +16,10 @@
         </div>
 
         <div v-show="!isLoading && !isPhotoTaken">
-            <video ref="camera" :width="width" :height="height" with autoplay></video>
+            <select ref="videoSource">
+                <option v-for="videoDevice in VideoDevices" :value="videoDevice.label"></option>
+            </select>
+            <video ref="camera"  with autoplay></video>
             <button class="btn" @click="takePhoto">Take Photo</button>
         </div>
 

@@ -1,3 +1,5 @@
+'use strict'
+
 const app = Vue.createApp({
     name: 'App',
 
@@ -7,8 +9,9 @@ const app = Vue.createApp({
             isLoading: false,
             isPhotoTaken: false,
             stream: null,
-            width: 450,
-            height: 337.50
+            videoDevices: {},
+            width: 1280,
+            height: 720
         }
     },
 
@@ -27,15 +30,33 @@ const app = Vue.createApp({
             }
         },
 
+        getDevices(devicesInfo) {
+            for(let i in devicesInfo){
+                if(devicesInfo[i].kind === 'videoinput'){
+                    console.log(devicesInfo[i]);
+                    // this.videoDevices = {...this.videoDevices, devicesInfo[i]};
+                }
+            }   
+        },
+
         createCameraElement() {
             this.isLoading = true;
             const constraints = {
 				audio: false,
-				video: true
+                video: {
+                    width: {
+                      min: 1280,
+                    },
+                    height: {
+                      min: 720,
+                    }
+                  }
 			};
+            // Camara Steres id: '549e50b014e309539477605d9a314b11e8e76f832e927aff791f66b053cf3df1'
             navigator.mediaDevices
             .getUserMedia(constraints)
             .then(stream => {
+                console.log(stream);
                 this.isLoading = false;
                 this.$refs.camera.srcObject = stream;
                 this.stream = stream;
@@ -85,6 +106,7 @@ const app = Vue.createApp({
     mounted() {
         // this.$refs.canvas.clientWidth = this.$refs.camera.clientWidth;
         // this.$refs.canvas.clientHeight = this.$refs.camera.clientHeight;
+        navigator.mediaDevices.enumerateDevices().then(this.getDevices());
         this.createCameraElement();
     }
 });
