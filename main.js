@@ -77,11 +77,19 @@ const app = Vue.createApp({
 
         createCameraElement() {
             this.isLoading = true;
+            // const constraints = { deviceId: { exact: this.deviceSelected.deviceId } };
             const constraints = {
-				audio: false,
-                video: {resolution, deviceId: this.deviceSelected ? {exact: this.deviceSelected} : undefined}
+                video: true,
+                audio: false,
+                width: { min: 640, ideal: 1920, max: 1920 },
+                height: { min: 400, ideal: 1080 },
+                aspectRatio: 1.777777778,
+                frameRate: { max: 30 },
+                facingMode: { exact: "user" },
+                deviceId: {exact: this.deviceSelected.deviceId}
             };
             navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+                console.log(stream);
                 this.isLoading = false;
                 this.$refs.camera.srcObject = stream;
                 this.stream = stream;
