@@ -59,6 +59,7 @@ const app = Vue.createApp({
         deviceSelected: {
             handler: function(value) {
                 this.deviceSelected = value;
+                this.stopCameraStream();
                 this.createCameraElement();
             }
         }
@@ -100,6 +101,7 @@ const app = Vue.createApp({
         },
 
         stopCameraStream() {
+            if(!this.$refs.camera.srcObject) return;
             let tracks = this.$refs.camera.srcObject.getTracks();
             tracks.forEach(track => {
                 track.stop();
