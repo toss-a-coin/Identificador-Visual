@@ -87,10 +87,9 @@ const app = Vue.createApp({
                 aspectRatio: 1.777777778,
                 frameRate: { max: 30 },
                 facingMode: { exact: "user" },
-                deviceId: {exact: this.deviceSelected.deviceId}
+                deviceId: {exact: this.deviceSelected}
             };
             navigator.mediaDevices.getUserMedia(constraints).then(stream => {
-                console.log(stream);
                 this.isLoading = false;
                 this.$refs.camera.srcObject = stream;
                 this.stream = stream;
