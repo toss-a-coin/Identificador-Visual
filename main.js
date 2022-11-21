@@ -72,6 +72,7 @@ const app = Vue.createApp({
                     tempDevices = [...tempDevices, devicesInfo[i]];
             }
             this.videoDevices = tempDevices;
+            console.log(this.videoDevices);
         },
 
         createCameraElement() {
@@ -129,7 +130,7 @@ const app = Vue.createApp({
 
     beforeMount() {
         // this.getDevices(mediaDevices);
-        navigator.mediaDevices.enumerateDevices().then(this.getDevices());
+        navigator.mediaDevices.enumerateDevices().then(this.getDevices);
     },
 
     mounted() {
