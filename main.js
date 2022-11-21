@@ -55,14 +55,21 @@ const app = Vue.createApp({
         }
     },
 
+    watch: {
+        deviceSelected: {
+            handler: function(value) {
+                this.deviceSelected = value;
+                this.createCameraElement();
+            }
+        }
+    },
+
     methods: {
         getDevices(devicesInfo) {
             let tempDevices = [];
             for(let i in devicesInfo){
-                if(devicesInfo[i].kind === 'videoinput'){
+                if(devicesInfo[i].kind === 'videoinput')
                     tempDevices = [...tempDevices, devicesInfo[i]];
-                    
-                }
             }
             this.videoDevices = tempDevices;
         },
@@ -71,7 +78,7 @@ const app = Vue.createApp({
             this.isLoading = true;
             const constraints = {
 				audio: false,
-                video: {resolution, deviceId: videoSource ? {exact: videoSource} : undefined}
+                video: {resolution, deviceId: this.deviceSelected ? {exact: this.deviceSelected} : undefined}
             };
             navigator.mediaDevices.getUserMedia(constraints).then(stream => {
                 this.isLoading = false;
@@ -120,16 +127,9 @@ const app = Vue.createApp({
         }
     },
 
-    watch: {
-        deviceSelected: (value, oldValue) => {
-            this.deviceSelected = value;
-            this.createCameraElement();
-        }
-    },
-
     beforeMount() {
-        // this.getDevices(mediaDevices);
-        navigator.mediaDevices.enumerateDevices().then(this.getDevices());
+        this.getDevices(mediaDevices);
+        // navigator.mediaDevices.enumerateDevices().then(this.getDevices());
     },
 
     mounted() {
