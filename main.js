@@ -128,8 +128,8 @@ const app = Vue.createApp({
     },
 
     beforeMount() {
-        this.getDevices(mediaDevices);
-        // navigator.mediaDevices.enumerateDevices().then(this.getDevices());
+        // this.getDevices(mediaDevices);
+        navigator.mediaDevices.enumerateDevices().then(this.getDevices());
     },
 
     mounted() {
