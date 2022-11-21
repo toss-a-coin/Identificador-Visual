@@ -8,32 +8,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title></title>
 </head>
-<body id="app">
-    <div>
-        <div v-show="isLoading">
-            <span>Loading ...</span>
-        </div>
-
-        <div v-show="!isLoading && !isPhotoTaken">
-            <!-- <select ref="videoSource">
-                <option v-for="videoDevice in VideoDevices" :value="videoDevice.label"></option>
-            </select> -->
-            <video ref="camera"  with autoplay></video>
-            <button class="btn" @click="takePhoto">Take Photo</button>
-        </div>
-
-        <div v-show="isPhotoTaken">
-            <canvas ref="canvas" :width="width" :height="height" id="photoTaken"></canvas>
-            <div class="canvas-btn">
-                <button  @click="reDoPhoto">Try Again</button>
-                <a id="downloadPhoto" download="my-photo.png">
-                    <button  @click="downloadImg">Download </button>
-                </a>
-            </div>
-        </div>
-
-    </div>
-</body>
+<body id="app"></body>
 <script src="./main.js"></script>
 </html>
 
